@@ -1,6 +1,21 @@
 백엔드를 공부하고 예제를 돌려봅니다.
 fastapi.mudomain.com : Fast API 서버(Rest API)
 
+## Sync & Async
+--worker 옵션을 이용하면 동기를 비동기하게 처리 한다.
+'''
+# Non-Block
+@router.get("/async/sync")
+async def async_with_sync():
+  from fastapi.concurrency import run_in_threadpool
+  await run_in_threadpool(sleep, 10)
+  logger.info('running...')
+'''
+- worker 옵션 사용방법 (worker 를 세개 사용한다)
+'''
+uvicorn src.app:app --port 8000 --workers 3
+'''
+
 Rest API 란?
 Representational State Transfer 용어의 약자
 
